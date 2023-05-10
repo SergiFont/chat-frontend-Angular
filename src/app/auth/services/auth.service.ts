@@ -41,6 +41,8 @@ export class AuthService {
 
         catchError( err => throwError( () => err.error.message )
 
+// TODO finish this implementation
+
         )
       )
   }

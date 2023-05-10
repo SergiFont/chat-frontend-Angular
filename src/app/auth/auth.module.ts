@@ -12,7 +12,8 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
   declarations: [
     LoginPageComponent,
     RegisterPageComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+
   ],
   imports: [
     CommonModule,

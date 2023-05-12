@@ -30,7 +30,7 @@ export class AppComponent {
         return
 
       case AuthStatus.authenticated:
-        this.router.navigateByUrl('/dashboard')
+        this.router.navigateByUrl('/home')
         return
 
       case AuthStatus.notAuthenticated:

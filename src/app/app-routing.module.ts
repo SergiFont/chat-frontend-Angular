@@ -11,14 +11,14 @@ const routes: Routes = [
   },
 
   {
-    path: 'dashboard',
+    path: 'home',
     canActivate: [ isAuthenticatedGuard ],
-    loadChildren: () => import('./dashboard/dashboard.module').then( m => m.DashboardModule ),
+    loadChildren: () => import('./home/home.module').then( m => m.HomeModule ),
   },
 
   {
     path: '**',
-    redirectTo: 'dashboard'
+    redirectTo: 'home'
   },
 
 

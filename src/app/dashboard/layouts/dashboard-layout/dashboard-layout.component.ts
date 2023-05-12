@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 export class DashboardLayoutComponent {
 
   private authService = inject( AuthService );
+  public actualComponent = ''
 
   public user = computed(() => this.authService.currentUser() );
 
@@ -18,5 +19,9 @@ export class DashboardLayoutComponent {
   onLogout() {
     this.authService.logout();
   }
+
+  // changeComponent( component: string ) {
+  //   this.actualComponent = component
+  // }
 
 }

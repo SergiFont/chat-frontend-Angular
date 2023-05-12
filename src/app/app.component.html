@@ -1,5 +1,17 @@
-<h1 *ngIf="!finishAuthCheck()">
-  Loading
-</h1>
+<div class="row mt-4">
 
-<router-outlet *ngIf="finishAuthCheck()" />
+
+
+  <h1 *ngIf="!finishAuthCheck()">
+    Loading
+  </h1>
+  <div class="col-3">
+
+    <router-outlet *ngIf="finishAuthCheck()" />
+
+  </div>
+
+
+</div>
+
+

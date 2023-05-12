@@ -9,23 +9,27 @@ import { isAuthenticatedGuard } from '../auth/guards/is-authenticated.guard';
 const routes: Routes = [
   {
     path: '',
+    canActivate: [ isAuthenticatedGuard ],
     component: DashboardLayoutComponent,
+    children: [
+      {
+        path: 'home',
+        canActivate: [ isAuthenticatedGuard ],
+        component: HomePageComponent,
+      },
+      {
+        path: 'chats',
+        canActivate: [ isAuthenticatedGuard ],
+        component: ChatsPageComponent,
+      },
+      {
+        path: 'users',
+        canActivate: [ isAuthenticatedGuard ],
+        component: UsersPageComponent,
+      },
+    ]
   },
-  {
-    path: 'home',
-    canActivate: [ isAuthenticatedGuard ],
-    component: HomePageComponent,
-  },
-  {
-    path: 'chats',
-    canActivate: [ isAuthenticatedGuard ],
-    component: ChatsPageComponent,
-  },
-  {
-    path: 'users',
-    canActivate: [ isAuthenticatedGuard ],
-    component: UsersPageComponent,
-  },
+
 ];
 
 @NgModule({

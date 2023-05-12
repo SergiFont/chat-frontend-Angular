@@ -4,27 +4,27 @@ import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-l
 import { HomePageComponent } from '../shared/pages/home-page/home-page.component';
 import { ChatsPageComponent } from '../shared/pages/chats-page/chats-page.component';
 import { UsersPageComponent } from '../shared/pages/users-page/users-page.component';
+import { isAuthenticatedGuard } from '../auth/guards/is-authenticated.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: DashboardLayoutComponent,
-    // children: []
   },
   {
     path: 'home',
+    canActivate: [ isAuthenticatedGuard ],
     component: HomePageComponent,
-    // children: []
   },
   {
     path: 'chats',
+    canActivate: [ isAuthenticatedGuard ],
     component: ChatsPageComponent,
-    // children: []
   },
   {
     path: 'users',
+    canActivate: [ isAuthenticatedGuard ],
     component: UsersPageComponent,
-    // children: []
   },
 ];
 

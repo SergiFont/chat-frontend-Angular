@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'shared-users-page',
+  selector: 'users-page',
   templateUrl: './users-page.component.html',
   styles: [
   ]

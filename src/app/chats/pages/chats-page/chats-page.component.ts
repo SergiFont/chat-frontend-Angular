@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'shared-chats-page',
+  selector: 'chats-page',
   templateUrl: './chats-page.component.html',
   styles: [
   ]

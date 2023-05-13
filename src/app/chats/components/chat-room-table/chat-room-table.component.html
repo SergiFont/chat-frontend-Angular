@@ -1,0 +1,28 @@
+<div *ngIf="chatRooms?.length === 0; else table" class="alert alert-warning text-center">
+  No chat rooms were found
+</div>
+
+<ng-template #table>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let chatRoom of chatRooms; let i = index">
+        <td> {{ i + 1 }} </td>
+        <td> {{ chatRoom.name }} </td>
+        <td> {{ chatRoom.description }} </td>
+        <td>
+          <a href="#">Enter room</a>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+</ng-template>

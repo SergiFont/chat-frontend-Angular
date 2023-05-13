@@ -66,7 +66,7 @@ export class AuthService {
 
   checkAuthStatus():Observable<boolean> {
 
-    const url = `${ this.baseUrl }/api/auth`
+    const url = `${ this.baseUrl }/api/auth/checkAuth`
     const token = localStorage.getItem('token')
 
     if ( !token ) {

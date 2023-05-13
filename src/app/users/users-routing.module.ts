@@ -1,6 +1,7 @@
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { isAuthenticatedGuard } from '../auth/guards/is-authenticated.guard';
 import { UsersPageComponent } from './pages/users-page/users-page.component';
+import { NgModule } from '@angular/core';
 
 export const routes: Routes = [
     {
@@ -9,3 +10,13 @@ export const routes: Routes = [
       component: UsersPageComponent
     }
 ]
+
+@NgModule({
+  imports: [
+    RouterModule.forChild( routes )
+  ],
+  exports: [
+    RouterModule
+  ]
+})
+export class UsersRoutingModule { }

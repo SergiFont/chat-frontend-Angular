@@ -3,23 +3,18 @@
 
 <div class="row">
   <div class="col">
-    
+    <shared-search-box
+      placeholder="Search a room..."
+      >
+
+    </shared-search-box>
   </div>
 </div>
-<!-- <div class="row">
-  <div class="col">
-    <shared-search-box
-      placeholder="Search by capital..."
-
-      >
-    </shared-search-box>
-  </div> -->
 
   <div class="row">
     <div class="col">
       <hr>
-      <!-- <countries-table [countries]="countries"></countries-table> -->
+      <chat-room-table [chatRooms]="defaultChatRooms"></chat-room-table>
     </div>
-  <!-- </div> -->
 
 </div>

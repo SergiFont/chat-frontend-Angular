@@ -1,5 +1,5 @@
 import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { SearchBoxComponent } from './components/search-box/search-box.component';
@@ -18,6 +18,6 @@ import { SearchBoxComponent } from './components/search-box/search-box.component
   exports: [
     SidebarComponent,
     SearchBoxComponent
-  ]
+  ],
 })
 export class SharedModule { }

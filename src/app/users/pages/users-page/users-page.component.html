@@ -1,7 +1,20 @@
+<h2>Users</h2>
+<hr>
 
+<div class="row">
+  <div class="col">
+    <shared-search-box
+      placeholder="Search a user..."
+      >
 
-  <!-- <shared-sidebar></shared-sidebar> -->
+    </shared-search-box>
+  </div>
+</div>
 
+  <div class="row">
+    <div class="col">
+      <hr>
+      <user-table [users]="chatUsers"></user-table>
+    </div>
 
-
-<p>users-page works!</p>
+</div>

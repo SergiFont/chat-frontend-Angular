@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ChatRoom } from '../../interfaces/Chat-room.interface';
+import { ChatsService } from '../../services/chats.service';
 
 @Component({
   selector: 'chats-page',
@@ -6,6 +8,19 @@ import { Component } from '@angular/core';
   styles: [
   ]
 })
-export class ChatsPageComponent {
+export class ChatsPageComponent implements OnInit {
+
+  public defaultChatRooms?: ChatRoom[] = []
+  public chatRooms: ChatRoom[] = []
+
+  constructor( private chatsService: ChatsService ) {}
+
+  ngOnInit(): void {
+    this.chatsService.findAllRooms()
+      .subscribe( chatRooms => {
+        return this.defaultChatRooms = chatRooms
+      })
+
+  }
 
 }

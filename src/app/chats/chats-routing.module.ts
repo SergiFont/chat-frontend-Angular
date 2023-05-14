@@ -8,6 +8,11 @@ export const routes: Routes = [
       path: 'chats',
       canActivate: [ isAuthenticatedGuard ],
       component: ChatsPageComponent
+    },
+    {
+      path:':id',
+      canActivate: [ isAuthenticatedGuard],
+      component: ChatsPageComponent
     }
 ]
 

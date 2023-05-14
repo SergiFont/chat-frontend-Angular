@@ -1,0 +1,46 @@
+
+<ng-template #loading>
+  <div class="alert alert-info text-center">
+    Wait please
+  </div>
+</ng-template>
+
+
+<div *ngIf="room; else loading">
+  <div class="row">
+    <div class="col-12">
+      <h2>Room: <strong> {{room.name}} </strong></h2>
+      <hr>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <h3>Information</h3>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <strong>Description:</strong> {{room.description}}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- <div class="row mt-2">
+    <div class="col">
+
+      <h3>Traductions</h3>
+
+      <div class="d-flex flex-wrap">
+
+        <span class="badge bg-primary m-1"> {{ country.translations['ara'].common }} </span>
+        <span class="badge bg-primary m-1"> {{ country.translations['spa'].common }} </span>
+        <span class="badge bg-primary m-1"> {{ country.translations['kor'].common }} </span>
+        <span class="badge bg-primary m-1"> {{ country.translations['jpn'].common }} </span>
+        <span class="badge bg-primary m-1"> {{ country.translations['ces'].common }} </span>
+        <span class="badge bg-primary m-1"> {{ country.translations['per'].common }} </span>
+
+      </div>
+    </div>
+  </div>
+
+</div> -->

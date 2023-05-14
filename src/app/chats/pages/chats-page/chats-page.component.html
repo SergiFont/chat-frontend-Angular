@@ -4,6 +4,7 @@
 <div class="row">
   <div class="col">
     <shared-search-box
+      (onDebounce)="searchByName($event)"
       placeholder="Search a room..."
       >
 
@@ -14,7 +15,8 @@
   <div class="row">
     <div class="col">
       <hr>
-      <chat-room-table [chatRooms]="defaultChatRooms"></chat-room-table>
+      <shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner>
+      <chat-room-table [chatRooms]="chatRooms"></chat-room-table>
     </div>
 
 </div>

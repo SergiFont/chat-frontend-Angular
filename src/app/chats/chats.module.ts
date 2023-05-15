@@ -5,13 +5,15 @@ import { ChatsPageComponent } from './pages/chats-page/chats-page.component';
 import { ChatsRoutingModule } from './chats-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { ChatRoomTableComponent } from './components/chat-room-table/chat-room-table.component';
-// import { ByChatNameComponent } from './pages/by-chat-name/by-chat-name.component';
+import { ChatRoomComponent } from './pages/chat-room/chat-room.component';
+import { LayoutPageComponent } from './pages/layout-page/layout-page.component';
 
 @NgModule({
   declarations: [
     ChatsPageComponent,
     ChatRoomTableComponent,
-    // ByChatNameComponent,
+    ChatRoomComponent,
+    LayoutPageComponent
   ],
   imports: [
     CommonModule,

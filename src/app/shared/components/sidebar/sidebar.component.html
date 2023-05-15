@@ -27,21 +27,31 @@
 <div class="sidebar">
   <h2>Menu</h2>
   <hr>
-
   <ul class="list-group">
-    <li routerLink="home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="list-group-item">
-      Home
-    </li>
-    <li routerLink="chats" routerLinkActive="active" class="list-group-item">
-      Chats
-    </li>
-    <li routerLink="users" routerLinkActive="active" class="list-group-item">
-      Users
-    </li>
-     <button class="sidebar-button" (click)="onLogout()">
-      Log out
+    <li routerLink="home" class="list-group-item">
+    <button class="sidebar-button">
+      <i class="fas fa-home"> Home</i>
     </button>
+  </li>
+    <!-- <li routerLink="home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="list-group-item">
+      Home
+    </li> -->
+    <li routerLink="chats" class="list-group-item">
+      <button class="sidebar-button">
+        <i class="fas fa-regular fa-comment"> Chats</i>
+      </button>
+    </li>
+    <li routerLink="users" class="list-group-item">
+      <button class="sidebar-button">
+        <i class="fas fa-regular fa-user"> Users</i>
+      </button>
+    </li>
+    <li class="list-group-item">
+    <button class="sidebar-button" (click)="onLogout()">
+      <i class="fas fa-solid fa-door-open"> Log out</i>
 
+   </button>
+  </li>
   </ul>
 </div>
 

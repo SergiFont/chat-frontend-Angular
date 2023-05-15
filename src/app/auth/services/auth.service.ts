@@ -79,10 +79,8 @@ export class AuthService {
 
     return this.http.get<CheckTokenResponse>( url, { headers })
       .pipe(
-        tap( result => console.log(result) ),
         map( ({ user, token }) => this.setAuthentication( user, token )),
           catchError((err) => {
-            console.log({err});
             this._authStatus.set( AuthStatus.notAuthenticated )
             return of(false
             )})

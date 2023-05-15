@@ -22,7 +22,6 @@ const routes: Routes = [
     redirectTo: 'home'
   },
 
-
 ];
 
 @NgModule({

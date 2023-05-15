@@ -7,13 +7,13 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 })
 export class HomePageComponent {
 
-  private authService = inject( AuthService );
-  public actualComponent = ''
+  // private authService = inject( AuthService );
+  // public actualComponent = ''
 
-  public user = computed(() => this.authService.currentUser() );
+  // public user = computed(() => this.authService.currentUser() );
 
-  onLogout() {
-    this.authService.logout();
-  }
+  // onLogout() {
+  //   this.authService.logout();
+  // }
 
 }

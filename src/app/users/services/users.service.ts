@@ -50,7 +50,6 @@ export class UsersService {
 
     return this.http.get<APIUserResponse>( url, { headers } )
       .pipe(
-        tap( response => console.log( 'Users:', response )),
         map( (response: APIUserResponse) => response.user ),
         catchError( () => of([])),
         delay( 1000 )

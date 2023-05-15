@@ -12,13 +12,10 @@ import { ChatsService } from '../../services/chats.service';
 })
 export class ChatsPageComponent implements OnInit {
 
-  // public defaultChatRooms?: ChatRoom[] = []
   public chatRooms: ChatRoom[] = []
   public isLoading: boolean = false
 
   constructor(
-    // private activatedRoute: ActivatedRoute,
-    // private router: Router,
     private chatsService: ChatsService,
      ) {}
 

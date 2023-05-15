@@ -1,4 +1,4 @@
-<h2>Menu</h2>
+<!-- <h2>Menu</h2>
 <hr>
 
 <ul class="list-group">
@@ -22,4 +22,27 @@
     Users
   </li>
 
-</ul>
+</ul> -->
+
+<div class="sidebar">
+  <h2>Menu</h2>
+  <hr>
+
+  <ul class="list-group">
+    <li routerLink="home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="list-group-item">
+      Home
+    </li>
+    <li routerLink="chats" routerLinkActive="active" class="list-group-item">
+      Chats
+    </li>
+    <li routerLink="users" routerLinkActive="active" class="list-group-item">
+      Users
+    </li>
+     <button class="sidebar-button" (click)="onLogout()">
+      Log out
+    </button>
+
+  </ul>
+</div>
+
+

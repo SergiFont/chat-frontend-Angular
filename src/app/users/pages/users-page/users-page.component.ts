@@ -20,7 +20,6 @@ export class UsersPageComponent implements OnInit {
     this.usersService.findAllUsers()
       .subscribe ( users => {
 
-          console.log(users);
           this.chatUsers = users
 
       })
@@ -32,7 +31,6 @@ export class UsersPageComponent implements OnInit {
 
    this.usersService.findUsersByName( term )
       .subscribe( user => {
-        console.log(user)
         this.chatUsers = user
         this.isLoading = false
       })

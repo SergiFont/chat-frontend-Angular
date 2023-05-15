@@ -32,7 +32,7 @@ export class AuthService {
     return true
   }
 
-  register( email: string, username: string, password: string) {
+  register( email: string, username: string, password: string): Observable<boolean> {
 
     const url = `${ this.baseUrl }/api/auth/register`
     const body = { email, username, password }
@@ -79,6 +79,7 @@ export class AuthService {
 
     return this.http.get<CheckTokenResponse>( url, { headers })
       .pipe(
+        tap( result => console.log(result) ),
         map( ({ user, token }) => this.setAuthentication( user, token )),
           catchError((err) => {
             console.log({err});
@@ -87,4 +88,5 @@ export class AuthService {
             )})
       )
   }
+
 }

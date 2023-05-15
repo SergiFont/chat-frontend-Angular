@@ -4,6 +4,7 @@ import { UsersPageComponent } from '../users/pages/users-page/users-page.compone
 import { isAuthenticatedGuard } from '../auth/guards/is-authenticated.guard';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ChatsPageComponent } from '../chats/pages/chats-page/chats-page.component';
+import { checkTokenGuard } from '../auth/guards/check-token.guard';
 
 const routes: Routes = [
   {
@@ -13,12 +14,12 @@ const routes: Routes = [
     children: [
       {
         path: 'users',
-        canActivate: [ isAuthenticatedGuard ],
+        canActivate: [ checkTokenGuard ],
         component: UsersPageComponent,
       },
       {
         path: 'chats',
-        canActivate: [ isAuthenticatedGuard ],
+        canActivate: [ checkTokenGuard ],
         component: ChatsPageComponent
       }
     ]

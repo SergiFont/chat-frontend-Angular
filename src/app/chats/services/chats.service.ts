@@ -22,9 +22,11 @@ export class ChatsService {
     const url: string = `${ this.baseUrl }/api/rooms`
     const token = localStorage.getItem('token')
 
-    if ( !token ) {
-      this.authService.logout()
-    }
+    this.authService.checkAuthStatus()
+
+    // if ( !token ) {
+    //   this.authService.logout()
+    // }
 
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${ token }`)
@@ -41,9 +43,10 @@ export class ChatsService {
     const url: string = `${ this.baseUrl }/api/rooms/${term}`
     const token = localStorage.getItem('token')
 
-    if ( !token ) {
-      this.authService.logout()
-    }
+    this.authService.checkAuthStatus()
+    // if ( !token ) {
+    //   this.authService.logout()
+    // }
 
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${ token }`)

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatRoom } from '../../interfaces/Chat-room.interface';
 import { ChatsService } from '../../services/chats.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap } from 'rxjs';
+// import { ActivatedRoute, Router } from '@angular/router';
+// import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'chats-page',
@@ -14,12 +14,11 @@ export class ChatsPageComponent implements OnInit {
 
   // public defaultChatRooms?: ChatRoom[] = []
   public chatRooms: ChatRoom[] = []
-  // public room: ChatRoom
   public isLoading: boolean = false
 
   constructor(
-    private activatedRoute: ActivatedRoute,
-    private router: Router,
+    // private activatedRoute: ActivatedRoute,
+    // private router: Router,
     private chatsService: ChatsService,
      ) {}
 

@@ -10,8 +10,9 @@ import { UsersService } from '../../services/users.service';
 })
 export class UsersPageComponent implements OnInit {
 
-  public defaultUsers?: ChatUser[] = []
+  // public defaultUsers?: ChatUser[] = []
   public chatUsers?: ChatUser[] = []
+  public isLoading: boolean = false
 
   constructor( private usersService: UsersService ) {}
 
@@ -23,6 +24,19 @@ export class UsersPageComponent implements OnInit {
           this.chatUsers = users
 
       })
+  }
+
+  searchByName( term: string ): void {
+
+    this.isLoading = true
+
+   this.usersService.findUsersByName( term )
+      .subscribe( user => {
+        console.log(user)
+        this.chatUsers = user
+        this.isLoading = false
+      })
+
   }
 
 }

@@ -31,7 +31,7 @@ export class ChatsService {
 
     return this.http.get<ChatRoom[]>( url, { headers } )
       .pipe(
-        tap( rooms => console.log('Rooms:', rooms) ),
+        tap( rooms => console.log( 'Rooms:', rooms ) ),
         catchError( () => of([]))
       )
   }

@@ -9,6 +9,7 @@ import { ChatRoomComponent } from './pages/chat-room/chat-room.component';
 import { LayoutPageComponent } from './pages/layout-page/layout-page.component';
 import { WebsocketModule } from '../websocket/websocket.module';
 import { FooterComponent } from './components/footer/footer.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FooterComponent } from './components/footer/footer.component';
     CommonModule,
     ChatsRoutingModule,
     SharedModule,
-    WebsocketModule
+    WebsocketModule,
+    FormsModule
   ],
 
 })

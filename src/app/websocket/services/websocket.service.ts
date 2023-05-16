@@ -26,6 +26,16 @@ export class WebsocketService {
         console.log('Disconnected from the server');
         this.socketStatus = false
       })
+     }
 
+     emit( event: string, payload?: any ) {
+
+      console.log('Emitting ', event);
+      this.socket.emit ( event, payload )
+
+     }
+
+     listen( event: string ) {
+      return this.socket.fromEvent( event )
      }
 }

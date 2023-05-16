@@ -1,5 +1,25 @@
-<p>chat-room works!</p>
+<h1>Messages</h1>
+<hr>
 
-<app-websocket></app-websocket>
+<div id="chat-messages" #chatMessages>
+  <li class="list-group-item"
+      *ngFor="let msg of messages">
+    {{ msg.from }}: {{ msg.message }}
+  </li>
+</div>
+
+<form (ngSubmit)="send()">
+
+  <input type="text"
+         [(ngModel)]="text"
+         class="form-control chat-input"
+         name="text"
+         placeholder="Message..."
+         autofocus
+         autocomplete="off"
+        >
+
+</form>
+
 
 <app-footer></app-footer>

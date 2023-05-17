@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { WebsocketService } from './websocket.service';
-import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Injectable({

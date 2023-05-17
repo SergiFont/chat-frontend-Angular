@@ -52,11 +52,8 @@ export class AuthService {
     const url = `${ this.baseUrl }/api/auth/login`
     const body = { email, password }
 
-
-
     return this.http.post<LoginResponse>( url, body )
       .pipe(
-        // tap( ( { user } ) => this.userLog = UserLogged.create( user )),
         map( ( { user, token } ) => this.setAuthentication( user, token )),
         catchError( err => throwError( () => err.error.message )
         )

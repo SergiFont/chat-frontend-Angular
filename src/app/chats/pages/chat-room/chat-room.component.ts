@@ -28,7 +28,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.messagesSubscription = this.messageService.getMessages().subscribe( msg => {
-
+      
       this.messages.push( msg )
       this.scrollChatToBottom()
 

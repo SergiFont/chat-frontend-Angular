@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Socket } from 'ngx-socket-io';
+import { Socket, SocketIoConfig } from 'ngx-socket-io';
+import { environment } from 'src/environments/environments';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,6 @@ export class WebsocketService {
   constructor(
     private socket: Socket
     ) {
-      console.log(socket);
       this.checkStatus()
      }
 

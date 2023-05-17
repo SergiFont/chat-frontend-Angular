@@ -4,7 +4,9 @@
 <div id="chat-messages" #chatMessages>
   <li class="list-group-item"
       *ngFor="let msg of messages">
-    {{ msg.from }}: {{ msg.message }}
+      <h6>{{ msg.from }}:</h6>
+     {{ msg.message }}
+     <hr>
   </li>
 </div>
 

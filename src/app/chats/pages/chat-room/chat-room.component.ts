@@ -37,7 +37,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
 
-    this.messagesSubscription?.unsubscribe()
+    this.messagesSubscription.unsubscribe()
 
   }
 

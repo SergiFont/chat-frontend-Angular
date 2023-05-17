@@ -6,16 +6,21 @@ import { UsersPageComponent } from './pages/users-page/users-page.component';
 import { SharedModule } from '../shared/shared.module';
 import { UsersRoutingModule } from './users-routing.module';
 import { UserTableComponent } from './components/user-table/user-table.component';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 @NgModule({
   declarations: [
     UsersPageComponent,
-    UserTableComponent
+    UserTableComponent,
+    UserListComponent,
   ],
   imports: [
     CommonModule,
     UsersRoutingModule,
-    SharedModule
+    SharedModule,
   ],
+  exports: [
+    UserListComponent,
+  ]
 })
 export class UsersModule { }

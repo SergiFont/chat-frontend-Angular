@@ -5,7 +5,8 @@ import { ChatsService } from '../../services/chats.service';
 @Component({
   selector: 'chats-page',
   templateUrl: './chats-page.component.html',
-  styles: [
+  styleUrls: [
+    './chats-page.component.css'
   ]
 })
 export class ChatsPageComponent implements OnInit {

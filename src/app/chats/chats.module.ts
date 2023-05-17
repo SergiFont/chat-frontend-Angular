@@ -10,6 +10,7 @@ import { LayoutPageComponent } from './pages/layout-page/layout-page.component';
 import { WebsocketModule } from '../websocket/websocket.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { FormsModule } from '@angular/forms';
+import { UsersModule } from '../users/users.module';
 
 @NgModule({
   declarations: [
@@ -24,8 +25,12 @@ import { FormsModule } from '@angular/forms';
     ChatsRoutingModule,
     SharedModule,
     WebsocketModule,
-    FormsModule
+    FormsModule,
+    UsersModule,
   ],
+  exports: [
+    ChatsRoutingModule
+  ]
 
 })
 export class ChatsModule { }

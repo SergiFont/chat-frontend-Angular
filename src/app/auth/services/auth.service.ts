@@ -3,6 +3,7 @@ import { Injectable, inject, signal, computed } from '@angular/core';
 import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environments';
 import { AuthStatus, CheckTokenResponse, LoginResponse, RegisterResponse, User } from '../interfaces';
+// import { UserLogged } from '../class/user';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class AuthService {
 
   public currentUser = computed( () => this._currentUser() )
   public authStatus = computed( () => this._authStatus() )
+  // public userLog!: UserLogged
 
 
   constructor() {
@@ -39,8 +41,8 @@ export class AuthService {
 
     return this.http.post<RegisterResponse>( url, body)
       .pipe(
-        map( ({ user, token }) => this.setAuthentication( user, token)),
-        catchError( err => throwError( () => err.error.message))
+        map( ({ user, token }) => this.setAuthentication( user, token )),
+        catchError( err => throwError( () => err.error.message ))
       )
 
   }
@@ -50,9 +52,12 @@ export class AuthService {
     const url = `${ this.baseUrl }/api/auth/login`
     const body = { email, password }
 
+
+
     return this.http.post<LoginResponse>( url, body )
       .pipe(
-        map( ({ user, token }) => this.setAuthentication( user, token )),
+        // tap( ( { user } ) => this.userLog = UserLogged.create( user )),
+        map( ( { user, token } ) => this.setAuthentication( user, token )),
         catchError( err => throwError( () => err.error.message )
         )
       )

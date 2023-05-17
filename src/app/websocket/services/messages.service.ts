@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { WebsocketService } from './websocket.service';
 import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,14 +9,17 @@ import { Observable } from 'rxjs';
 export class MessagesService {
 
   constructor(
-    public wsService: WebsocketService
+    public wsService: WebsocketService,
+    public authService: AuthService
   ) { }
 
 
 
     sendMessage( message:string ) {
 
-      this.wsService.emit('message-from-client', { from: 'Sergi', message })
+      const username = this.authService.currentUser()!.username
+
+      this.wsService.emit('message-from-client', { from: username, message })
 
     }
 

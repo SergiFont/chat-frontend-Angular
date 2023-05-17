@@ -16,7 +16,7 @@ export class AppComponent {
 
   public finishAuthCheck = computed<boolean> ( () => {
 
-    // console.log(this.authService.authStatus());
+    console.log(this.authService.authStatus());
 
     if ( this.authService.authStatus() === AuthStatus.checking) return false
 

@@ -24,16 +24,11 @@ export class ChatsService {
 
     this.authService.checkAuthStatus()
 
-    // if ( !token ) {
-    //   this.authService.logout()
-    // }
-
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${ token }`)
 
     return this.http.get<ChatRoom[]>( url, { headers } )
       .pipe(
-        // tap( rooms => console.log( 'Rooms:', rooms ) ),
         catchError( () => of([]))
       )
   }

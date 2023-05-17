@@ -12,12 +12,13 @@ export const routes: Routes = [
       component: LayoutPageComponent,
       children: [
         {
-          path: 'chats',
+          path: '',
+          canActivate: [ checkTokenGuard ],
           component: ChatsPageComponent
         },
         {
           path: 'room',
-          // canActivate: [ checkTokenGuard ],
+          canActivate: [ checkTokenGuard ],
           component: ChatRoomComponent
         }
       ]

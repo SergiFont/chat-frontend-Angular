@@ -23,7 +23,11 @@ export class MessagesService {
     }
 
     getMessages() {
-      return this.wsService.listen('message-from-server')
+      return this.wsService.listen( 'message-from-server' )
+    }
+
+    getPrivateMessages() {
+      return this.wsService.listen( 'private-message' )
     }
 
 }

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MessagesService } from 'src/app/websocket/services/messages.service';
+import { WebsocketService } from 'src/app/websocket/services/websocket.service';
 
 @Component({
   selector: 'app-home-layout',
@@ -6,6 +8,22 @@ import { Component } from '@angular/core';
   styles: [
   ]
 })
-export class HomeLayoutComponent {
+export class HomeLayoutComponent implements OnInit {
+
+  constructor(
+    public wsService: WebsocketService,
+    public messagesService: MessagesService
+  ) {}
+
+
+  ngOnInit(): void {
+
+    this.messagesService.getPrivateMessages().subscribe( msg => {
+
+      console.log(msg);
+
+    })
+
+  }
 
 }

@@ -11,7 +11,7 @@ export class WebsocketService {
   constructor(
     private socket: Socket
     ) {
-      this.checkStatus()
+        this.checkStatus()
      }
 
      checkStatus() {

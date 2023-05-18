@@ -21,7 +21,9 @@ export class AuthService {
   // public userLog!: UserLogged
 
 
-  constructor() {
+  constructor(
+    // private socketConfigService : SocketConfigService
+  ) {
     this.checkAuthStatus().subscribe()
   }
 

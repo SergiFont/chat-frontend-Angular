@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { ChatsRoutingModule, routes } from '../chats/chats-routing.module';
 import { HomeLayoutComponent } from './pages/home-layout/home-layout.component';
 import { ChatsModule } from '../chats/chats.module';
+import { UsersModule } from '../users/users.module';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { ChatsModule } from '../chats/chats.module';
     ChatsRoutingModule,
     HomeRoutingModule,
     SharedModule,
-    ChatsModule
+    ChatsModule,
+    UsersModule,
   ]
 })
 export class HomeModule { }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { WebsocketService } from './websocket.service';
+// import { WebsocketService } from './websocket.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 export class MessagesService {
 
   constructor(
-    public wsService: WebsocketService,
+    // public wsService: WebsocketService,
     public authService: AuthService
   ) { }
 
@@ -18,16 +18,16 @@ export class MessagesService {
 
       const username = this.authService.currentUser()!.username
 
-      this.wsService.emit('message-from-client', { from: username, message })
+      this.authService.emit('message-from-client', { from: username, message })
 
     }
 
     getMessages() {
-      return this.wsService.listen( 'message-from-server' )
+      return this.authService.listen( 'message-from-server' )
     }
 
     getPrivateMessages() {
-      return this.wsService.listen( 'private-message' )
+      return this.authService.listen( 'private-message' )
     }
 
 }

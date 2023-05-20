@@ -6,13 +6,13 @@ import { WebsocketComponent } from './components/websocket.component';
 
 @NgModule({
   declarations: [
-    WebsocketComponent
+    WebsocketComponent,
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    WebsocketComponent
+    WebsocketComponent,
   ]
 })
 export class WebsocketModule { }

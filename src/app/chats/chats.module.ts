@@ -11,6 +11,7 @@ import { WebsocketModule } from '../websocket/websocket.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { UsersModule } from '../users/users.module';
+import { AuthModule } from '../auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -24,9 +25,10 @@ import { UsersModule } from '../users/users.module';
     CommonModule,
     ChatsRoutingModule,
     SharedModule,
-    WebsocketModule,
+    // WebsocketModule,
     FormsModule,
     UsersModule,
+    AuthModule
   ],
   exports: [
     ChatsRoutingModule

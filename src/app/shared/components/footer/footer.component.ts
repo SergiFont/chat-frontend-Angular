@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 export class FooterComponent {
 
   constructor(
+    // public wsService: WebsocketService
     public authService: AuthService
   ) {}
 

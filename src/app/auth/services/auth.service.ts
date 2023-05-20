@@ -1,10 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, inject, signal, computed } from '@angular/core';
+import { Injectable, inject, signal, computed, Optional } from '@angular/core';
 import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environments';
 import { AuthStatus, CheckTokenResponse, LoginResponse, RegisterResponse, User } from '../interfaces';
-// import { UserLogged } from '../class/user';
-
+import { Socket } from 'ngx-socket-io'
 @Injectable({
   providedIn: 'root'
 })
@@ -18,11 +17,12 @@ export class AuthService {
 
   public currentUser = computed( () => this._currentUser() )
   public authStatus = computed( () => this._authStatus() )
+  public socketStatus = false
   // public userLog!: UserLogged
 
 
   constructor(
-    // private socketConfigService : SocketConfigService
+    private socket: Socket
   ) {
     this.checkAuthStatus().subscribe()
   }
@@ -35,7 +35,6 @@ export class AuthService {
 
     return true
   }
-
   register( email: string, username: string, password: string): Observable<boolean> {
 
     const url = `${ this.baseUrl }/api/auth/register`
@@ -66,6 +65,7 @@ export class AuthService {
     localStorage.removeItem('token')
     this._currentUser.set(null)
     this._authStatus.set( AuthStatus.notAuthenticated )
+    this.socket.disconnect()
   }
 
   checkAuthStatus():Observable<boolean> {
@@ -90,5 +90,52 @@ export class AuthService {
             )})
       )
   }
+
+  checkStatus(id: string) {
+
+    this.socketStatus = this.socket.ioSocket.connected
+
+    if ( !this.socketStatus ) {
+
+      this.connectSocket()
+      this.loginWs(id)
+
+    }
+
+    this.socket.on('connect', () => {
+      console.log('Connected to the server');
+      this.socketStatus = true
+    })
+
+    this.socket.on('disconnect', () => {
+      console.log('Disconnected from the server');
+      this.socketStatus = false
+    })
+   }
+
+   emit( event: string, payload?: any, callback?: Function ) {
+
+    console.log('Emitting ', event);
+    this.socket.emit ( event, payload, callback )
+
+   }
+
+   listen( event: string ) {
+    return this.socket.fromEvent( event )
+   }
+
+   loginWs( id: string ) {
+      this.emit( 'configuring-user', { id }, (resp: any) => {
+        console.log(resp);
+      }
+   )}
+
+   connectSocket() {
+    this.socket.connect()
+   }
+
+   disconnectSocket() {
+    this.socket.disconnect()
+   }
 
 }

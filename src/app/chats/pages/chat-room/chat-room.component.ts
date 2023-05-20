@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MessagesService } from 'src/app/websocket/services/messages.service';
-import { WebsocketService } from 'src/app/websocket/services/websocket.service';
+// import { WebsocketService } from 'src/app/websocket/services/websocket.service';
 
 
 @Component({
@@ -21,14 +21,14 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   messages: any[] = []
 
   constructor(
-    public wsService: WebsocketService,
+    // public wsService: WebsocketService,
     public messageService: MessagesService
   ) {}
 
   ngOnInit(): void {
 
     this.messagesSubscription = this.messageService.getMessages().subscribe( msg => {
-      
+
       this.messages.push( msg )
       this.scrollChatToBottom()
 

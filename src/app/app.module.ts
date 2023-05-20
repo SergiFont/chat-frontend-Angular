@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, forwardRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'
 
@@ -8,9 +8,10 @@ import { environment } from 'src/environments/environments';
 export const config: SocketIoConfig = {
   url: environment.wsUrl,
   options: {
-    extraHeaders: {
-      Authorization: `${localStorage.getItem('token')}`
-    }
+    autoConnect: false
+    // extraHeaders: {
+    //   Authorization: `${localStorage.getItem('token')}`
+    // }
   } };
 
 

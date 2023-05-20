@@ -1,30 +1,5 @@
-<!-- <h2>Menu</h2>
-<hr>
 
-<ul class="list-group">
-
-  <li routerLink="home"
-  routerLinkActive="active"
-  [routerLinkActiveOptions]="{ exact: true }"
-  class="list-group-item">
-    Home
-  </li>
-
-  <li routerLink="chats"
-  routerLinkActive="active"
-  class="list-group-item">
-    Chats
-  </li>
-
-  <li routerLink="users"
-  routerLinkActive="active"
-  class="list-group-item">
-    Users
-  </li>
-
-</ul> -->
-
-<div class="sidebar">
+<div class="sidebar" *ngIf="pepote">
   <h2>Menu</h2>
   <hr>
   <ul class="list-group">
@@ -55,4 +30,6 @@
   </ul>
 </div>
 
+<button class="btn btn-secondary" type="button" (click)="pepote = !pepote"> pepe
+</button>
 

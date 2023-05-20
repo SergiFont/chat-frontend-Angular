@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, inject, signal, computed, Optional } from '@angular/core';
-import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
+import { Injectable, inject, signal, computed } from '@angular/core';
+import { Observable, catchError, map, of, throwError } from 'rxjs';
 import { environment } from 'src/environments/environments';
 import { AuthStatus, CheckTokenResponse, LoginResponse, RegisterResponse, User } from '../interfaces';
 import { Socket } from 'ngx-socket-io'
@@ -10,97 +10,114 @@ import { Socket } from 'ngx-socket-io'
 export class AuthService {
 
   private readonly baseUrl: string = environment.baseUrl
-  private http = inject( HttpClient )
+  private http = inject(HttpClient)
 
-  private _currentUser = signal<User|null>(null)
-  private _authStatus = signal<AuthStatus>( AuthStatus.checking)
+  private _currentUser = signal<User | null>(null)
+  private _authStatus = signal<AuthStatus>(AuthStatus.checking)
 
-  public currentUser = computed( () => this._currentUser() )
-  public authStatus = computed( () => this._authStatus() )
+  public currentUser = computed(() => this._currentUser())
+  public authStatus = computed(() => this._authStatus())
   public socketStatus = false
-  // public userLog!: UserLogged
 
 
   constructor(
     private socket: Socket
   ) {
-    this.checkAuthStatus().subscribe()
+    // this.checkAuthStatus().subscribe()
   }
 
-  private setAuthentication( user: User, token: string): boolean {
 
-    this._currentUser.set( user )
-    this._authStatus.set( AuthStatus.authenticated )
-    localStorage.setItem('token', token)
+  register(email: string, username: string, password: string): Observable<boolean> {
 
-    return true
-  }
-  register( email: string, username: string, password: string): Observable<boolean> {
-
-    const url = `${ this.baseUrl }/api/auth/register`
+    const url = `${this.baseUrl}/api/auth/register`
     const body = { email, username, password }
 
-    return this.http.post<RegisterResponse>( url, body)
+    return this.http.post<RegisterResponse>(url, body)
       .pipe(
-        map( ({ user, token }) => this.setAuthentication( user, token )),
-        catchError( err => throwError( () => err.error.message ))
+        map(({ user, token }) => this.setAuthentication(user, token)),
+        catchError(err => throwError(() => err.error.message))
       )
 
   }
 
-  login( email:string, password: string ): Observable<boolean> {
+  login(email: string, password: string): Observable<boolean> {
 
-    const url = `${ this.baseUrl }/api/auth/login`
+    const url = `${this.baseUrl}/api/auth/login`
     const body = { email, password }
 
-    return this.http.post<LoginResponse>( url, body )
+    return this.http.post<LoginResponse>(url, body)
       .pipe(
-        map( ( { user, token } ) => this.setAuthentication( user, token )),
-        catchError( err => throwError( () => err.error.message )
+        map(({ user, token }) => this.setAuthentication(user, token)),
+        catchError(err => throwError(() => err.error.message)
         )
       )
   }
 
-  logout() {
+  logout(): void {
     localStorage.removeItem('token')
     this._currentUser.set(null)
-    this._authStatus.set( AuthStatus.notAuthenticated )
+    this._authStatus.set(AuthStatus.notAuthenticated)
     this.socket.disconnect()
+    this.socketStatus = false
   }
 
-  checkAuthStatus():Observable<boolean> {
+  private setAuthentication(user: User, token: string): boolean {
 
-    const url = `${ this.baseUrl }/api/auth/checkAuth`
+    this._currentUser.set(user)
+    this._authStatus.set(AuthStatus.authenticated)
+    localStorage.setItem('token', token)
+
+    return true
+  }
+
+  checkAuthStatus(): Observable<boolean> {
+
+    const url = `${this.baseUrl}/api/auth/checkAuth`
     const token = localStorage.getItem('token')
 
-    if ( !token ) {
+    if (!token) {
       this.logout()
-      return of( false )
+      return of(false)
     }
 
     const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${ token }`)
+      .set('Authorization', `Bearer ${token}`)
+    const options = {
+      headers: {'Authorization': `Bearer ${token}`}
+    }
 
-    return this.http.get<CheckTokenResponse>( url, { headers })
+    return this.http.get<CheckTokenResponse>(url, { headers })
       .pipe(
-        map( ({ user, token }) => this.setAuthentication( user, token )),
-          catchError((err) => {
-            this._authStatus.set( AuthStatus.notAuthenticated )
-            return of(false
-            )})
+        map(({ user, token }) => {
+          console.log('estoy en el map');
+          return this.setAuthentication(user, token)
+        }),
+        catchError((err) => {
+          this.logout()
+          console.log(err);
+          throwError(() => {
+            this._authStatus.set(AuthStatus.notAuthenticated)
+          })
+          return of(false)
+        })
       )
+
+      // fetch(url, { headers })
   }
+
 
   checkStatus(id: string) {
 
-    this.socketStatus = this.socket.ioSocket.connected
+    // this.socketStatus = this.socket.ioSocket.connected
 
-    if ( !this.socketStatus ) {
+    if (!this.socketStatus) {
 
       this.connectSocket()
       this.loginWs(id)
 
     }
+
+    this.socket.removeAllListeners()
 
     this.socket.on('connect', () => {
       console.log('Connected to the server');
@@ -111,31 +128,32 @@ export class AuthService {
       console.log('Disconnected from the server');
       this.socketStatus = false
     })
-   }
+    this.socketStatus = true
+  }
 
-   emit( event: string, payload?: any, callback?: Function ) {
+  emit(event: string, payload?: any): void {
 
     console.log('Emitting ', event);
-    this.socket.emit ( event, payload, callback )
+    this.socket.emit(event, payload)
 
-   }
+  }
 
-   listen( event: string ) {
-    return this.socket.fromEvent( event )
-   }
+  listen(event: string): Observable<unknown> {
+    return this.socket.fromEvent(event)
+  }
 
-   loginWs( id: string ) {
-      this.emit( 'configuring-user', { id }, (resp: any) => {
-        console.log(resp);
-      }
-   )}
+  loginWs(id: string): void {
+    this.emit('configuring-user', { id }
 
-   connectSocket() {
+    )
+  }
+
+  connectSocket(): void {
     this.socket.connect()
-   }
+  }
 
-   disconnectSocket() {
+  disconnectSocket(): void {
     this.socket.disconnect()
-   }
+  }
 
 }

@@ -4,6 +4,11 @@ import { CommonModule } from '@angular/common';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { SearchBoxComponent } from './components/search-box/search-box.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
+import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 
@@ -15,12 +20,18 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+
   ],
   exports: [
     SidebarComponent,
     SearchBoxComponent,
     LoadingSpinnerComponent,
+    MessagesModule,
+		MessageModule,
+		ButtonModule,
+		ToastModule,
+		InputTextModule
   ],
 })
 export class SharedModule { }

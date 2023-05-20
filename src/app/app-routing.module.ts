@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { checkTokenGuard } from './auth/guards/check-token.guard';
+import { HomeLayoutComponent } from './home/pages/home-layout/home-layout.component';
 // import { isAuthenticatedGuard } from './auth/guards/is-authenticated.guard';
 // import { checkTokenGuard } from './auth/guards/check-token.guard';
 // import { HomePageComponent } from './home/pages/home-page/home-page.component';
@@ -8,8 +10,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
-    loadChildren: () => import('./home/home.module').then( m => m.HomeModule ),
+    path: '', component: HomeLayoutComponent,
+    canActivate: [checkTokenGuard],
+    children: [
+      { path: 'chats', loadChildren: () => import('./chats/chats.module').then(m => m.ChatsModule)},
+      { path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule)}
+    ],
+    // canActivate: [checkTokenGuard],
+    // loadChildren: () => import('./home/home.module').then( m => m.HomeModule ),
   },
 
   {

@@ -14,7 +14,7 @@ export class MessagesService {
 
 
 
-    sendMessage( message:string ) {
+    sendMessage( message:string ): void {
 
       const username = this.authService.currentUser()!.username
 
@@ -23,10 +23,12 @@ export class MessagesService {
     }
 
     getMessages() {
+      // console.log('asdasdasd');
       return this.authService.listen( 'message-from-server' )
     }
 
     getPrivateMessages() {
+      // console.log('hello there');
       return this.authService.listen( 'private-message' )
     }
 

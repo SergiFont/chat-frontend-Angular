@@ -6,8 +6,7 @@ import { checkTokenGuard } from '../auth/guards/check-token.guard';
 
 export const routes: Routes = [
   {
-    path: 'users',
-    canActivate: [ checkTokenGuard ],
+    path: '',
     component: UsersPageComponent,
   }
 ]

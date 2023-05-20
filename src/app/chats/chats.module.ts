@@ -6,20 +6,20 @@ import { ChatsRoutingModule } from './chats-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { ChatRoomTableComponent } from './components/chat-room-table/chat-room-table.component';
 import { ChatRoomComponent } from './pages/chat-room/chat-room.component';
-import { LayoutPageComponent } from './pages/layout-page/layout-page.component';
 import { WebsocketModule } from '../websocket/websocket.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { UsersModule } from '../users/users.module';
 import { AuthModule } from '../auth/auth.module';
+import { MessagesDemoComponent } from './components/messages/messagesdemo.component';
 
 @NgModule({
   declarations: [
     ChatsPageComponent,
     ChatRoomTableComponent,
     ChatRoomComponent,
-    LayoutPageComponent,
-    FooterComponent
+    FooterComponent,
+    MessagesDemoComponent
   ],
   imports: [
     CommonModule,

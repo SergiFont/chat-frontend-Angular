@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/services/auth.service';
 // import { AuthService } from 'src/app/auth/services/auth.service';
 import { MessagesService } from 'src/app/websocket/services/messages.service';
@@ -23,12 +23,14 @@ export class HomeLayoutComponent implements OnInit {
   ) {}
 
 
+
   ngOnInit(): void {
 
     // this.isSocketConnected = this.socket.ioSocket.connected
 
     // this.authService.currentUser()?.id
-    this.authService.checkStatus( this.authService.currentUser()!.id )
+    if ( !this.authService.socketStatus) this.authService.checkStatus( this.authService.currentUser()!.id )
+    console.log(this.authService.socketStatus);
 
     this.messagesService.getPrivateMessages().subscribe( msg => {
 
@@ -37,5 +39,8 @@ export class HomeLayoutComponent implements OnInit {
     })
 
   }
+  // ngOnDestroy(): void {
+  //   this.authService.disconnectSocket()
+  // }
 
 }

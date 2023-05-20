@@ -4,25 +4,23 @@ import { ChatsPageComponent } from './pages/chats-page/chats-page.component';
 import { NgModule } from '@angular/core';
 import { checkTokenGuard } from '../auth/guards/check-token.guard';
 import { ChatRoomComponent } from './pages/chat-room/chat-room.component';
-import { LayoutPageComponent } from './pages/layout-page/layout-page.component';
+import { MessagesDemoComponent } from './components/messages/messagesdemo.component';
 
 export const routes: Routes = [
     {
       path: '',
-      component: LayoutPageComponent,
-      children: [
-        {
-          path: '',
-          canActivate: [ checkTokenGuard ],
-          component: ChatsPageComponent
-        },
-        {
-          path: 'room',
-          canActivate: [ checkTokenGuard ],
-          component: ChatRoomComponent
-        }
-      ]
+      component: ChatsPageComponent,
+
     },
+    {
+      path: 'demo',
+      component: MessagesDemoComponent
+
+    },
+    {
+      path: 'room',
+      component: ChatRoomComponent
+    }
 
 ]
 

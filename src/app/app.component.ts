@@ -16,24 +16,21 @@ export class AppComponent {
 
   public finishAuthCheck = computed<boolean> ( () => {
 
-    console.log(this.authService.authStatus());
-
     if ( this.authService.authStatus() === AuthStatus.checking) return false
 
     return true
   })
 
   public authStatusChangedEffect = effect( () => {
-
     switch( this.authService.authStatus() ) {
-      case AuthStatus.checking:
-        return
 
       case AuthStatus.authenticated:
+        console.log('authenticated');
         this.router.navigateByUrl('/home')
         return
 
       case AuthStatus.notAuthenticated:
+        console.log('noauth');
         this.router.navigateByUrl('/auth/login')
         return
     }

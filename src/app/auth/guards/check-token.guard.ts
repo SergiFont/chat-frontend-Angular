@@ -1,15 +1,11 @@
-import { CanActivateChildFn, CanActivateFn, Router } from '@angular/router';
+import { CanActivateFn } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { inject } from '@angular/core';
-import { AuthStatus } from '../interfaces';
-import { tap } from 'rxjs';
 
-export const checkTokenGuard: CanActivateFn = (childRoute, state) => {
+export const checkTokenGuard: CanActivateFn = (route, state) => {
   const authService  = inject( AuthService )
 
-  console.log(state);
   return authService.checkAuthStatus()
-
 };
 
 

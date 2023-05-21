@@ -10,7 +10,7 @@ import { Socket } from 'ngx-socket-io'
 export class AuthService {
 
   private readonly baseUrl: string = environment.baseUrl
-  private http = inject(HttpClient)
+  // private http = inject(HttpClient)
 
   private _currentUser = signal<User | null>(null)
   private _authStatus = signal<AuthStatus>(AuthStatus.checking)
@@ -21,7 +21,8 @@ export class AuthService {
 
 
   constructor(
-    private socket: Socket
+    private readonly socket: Socket,
+    private readonly http: HttpClient
   ) {
     // this.checkAuthStatus().subscribe()
   }
@@ -82,9 +83,6 @@ export class AuthService {
 
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${token}`)
-    const options = {
-      headers: {'Authorization': `Bearer ${token}`}
-    }
 
     return this.http.get<CheckTokenResponse>(url, { headers })
       .pipe(
@@ -101,14 +99,10 @@ export class AuthService {
           return of(false)
         })
       )
-
-      // fetch(url, { headers })
   }
 
 
-  checkStatus(id: string) {
-
-    // this.socketStatus = this.socket.ioSocket.connected
+  checkSocketStatus(id: string) {
 
     if (!this.socketStatus) {
 
@@ -128,12 +122,14 @@ export class AuthService {
       console.log('Disconnected from the server');
       this.socketStatus = false
     })
+
     this.socketStatus = true
+
   }
 
   emit(event: string, payload?: any): void {
 
-    console.log('Emitting ', event);
+    // console.log('Emitting ', event);
     this.socket.emit(event, payload)
 
   }
@@ -144,7 +140,6 @@ export class AuthService {
 
   loginWs(id: string): void {
     this.emit('configuring-user', { id }
-
     )
   }
 

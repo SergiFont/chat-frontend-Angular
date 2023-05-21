@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { ChatsPageComponent } from './pages/chats-page/chats-page.component';
@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { UsersModule } from '../users/users.module';
 import { AuthModule } from '../auth/auth.module';
 import { MessagesDemoComponent } from './components/messages/messagesdemo.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -25,10 +26,11 @@ import { MessagesDemoComponent } from './components/messages/messagesdemo.compon
     CommonModule,
     ChatsRoutingModule,
     SharedModule,
-    // WebsocketModule,
     FormsModule,
     UsersModule,
-    AuthModule
+    AuthModule,
+    RouterModule,
+    WebsocketModule
   ],
   exports: [
     ChatsRoutingModule

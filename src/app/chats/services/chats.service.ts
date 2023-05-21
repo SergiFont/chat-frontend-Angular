@@ -22,7 +22,7 @@ export class ChatsService {
     const url: string = `${ this.baseUrl }/api/rooms`
     const token = localStorage.getItem('token')
 
-    this.authService.checkAuthStatus()
+    // this.authService.checkAuthStatus()
 
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${ token }`)

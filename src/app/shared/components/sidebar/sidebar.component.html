@@ -1,7 +1,9 @@
+<button class="btn btn-secondary" type="button" (click)="showMenu = !showMenu"> Menu
+</button>
+<hr>
 
-<div class="sidebar" *ngIf="pepote">
-  <h2>Menu</h2>
-  <hr>
+<div class="sidebar" *ngIf="showMenu">
+
   <ul class="list-group">
     <li routerLink="home" class="list-group-item">
     <button class="sidebar-button">
@@ -30,6 +32,4 @@
   </ul>
 </div>
 
-<button class="btn btn-secondary" type="button" (click)="pepote = !pepote"> pepe
-</button>
 

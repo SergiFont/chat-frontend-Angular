@@ -11,30 +11,19 @@ import { AuthStatus } from './auth/interfaces';
 })
 export class AppComponent {
 
-  private authService = inject( AuthService )
-  private router = inject(Router)
+  constructor(
+    private readonly authService: AuthService,
+    private readonly router: Router
+  ) {}
 
-  public finishAuthCheck = computed<boolean> ( () => {
+  public authStatusChangedEffect = effect(() => {
 
-    if ( this.authService.authStatus() === AuthStatus.checking) return false
+    if (this.authService.authStatus() === AuthStatus.notAuthenticated) {
 
-    return true
-  })
+      this.router.navigateByUrl('/auth/login')
+      return
 
-  public authStatusChangedEffect = effect( () => {
-    switch( this.authService.authStatus() ) {
-
-      case AuthStatus.authenticated:
-        console.log('authenticated');
-        this.router.navigateByUrl('/home')
-        return
-
-      case AuthStatus.notAuthenticated:
-        console.log('noauth');
-        this.router.navigateByUrl('/auth/login')
-        return
     }
-
   })
 
 }

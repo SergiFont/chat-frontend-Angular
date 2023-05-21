@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { MessagesService } from 'src/app/websocket/services/messages.service';
 // import { WebsocketService } from 'src/app/websocket/services/websocket.service';
 
@@ -17,17 +18,27 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   @ViewChild('chatMessages', { static: false, read: ElementRef }) chatMessagesRef!: ElementRef;
   text: string = ''
   messagesSubscription!: Subscription
+  privateMessagesSub!: Subscription
 
   messages: any[] = []
 
   constructor(
     // public wsService: WebsocketService,
-    public messageService: MessagesService
+    public messagesService: MessagesService,
+    private readonly authService: AuthService,
   ) {}
 
   ngOnInit(): void {
 
-    this.messagesSubscription = this.messageService.getMessages().subscribe( msg => {
+    if ( !this.authService.socketStatus) this.authService.checkSocketStatus( this.authService.currentUser()!.id )
+
+    this.privateMessagesSub = this.messagesService.getPrivateMessages().subscribe( msg => {
+
+      console.log(msg);
+
+    })
+
+    this.messagesSubscription = this.messagesService.getMessages().subscribe( msg => {
 
       this.messages.push( msg )
       this.scrollChatToBottom()
@@ -38,6 +49,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
 
     this.messagesSubscription.unsubscribe()
+    this.privateMessagesSub.unsubscribe()
 
   }
 
@@ -45,7 +57,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
 
     if (!( this.text.trim() )) return
 
-    this.messageService.sendMessage(this.text)
+    this.messagesService.sendMessage(this.text)
 
     this.text = ''
   }

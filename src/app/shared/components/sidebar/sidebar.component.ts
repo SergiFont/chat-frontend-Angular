@@ -12,7 +12,7 @@ export class SidebarComponent {
 
   private authService = inject( AuthService );
   public actualComponent = ''
-  pepote: boolean = false
+  showMenu: boolean = false
 
   public user = computed(() => this.authService.currentUser() );
 

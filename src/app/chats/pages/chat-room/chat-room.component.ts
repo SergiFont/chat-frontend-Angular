@@ -16,16 +16,17 @@ export interface Message {
     './chat-room.component.css'
   ]
 })
-export class ChatRoomComponent implements OnInit {
+export class ChatRoomComponent implements OnInit, OnDestroy {
 
 
   @ViewChild('chatMessages', { static: false, read: ElementRef }) chatMessagesRef!: ElementRef;
   text: string = ''
+  msgSub!: Subscription
+  privateMsgSub!: Subscription
 
   messages: any[] = []
 
   constructor(
-    // public wsService: WebsocketService,
     public messagesService: MessagesService,
     private readonly authService: AuthService,
   ) {}
@@ -34,18 +35,25 @@ export class ChatRoomComponent implements OnInit {
 
     if ( !this.authService.socketStatus) this.authService.checkSocketStatus( this.authService.currentUser()!.id )
 
-    this.messagesService.getPrivateMessages().subscribe( msg => {
+    this.msgSub = this.messagesService.getPrivateMessages().subscribe( msg => {
 
       console.log(msg);
 
     })
 
-    this.messagesService.getMessages().subscribe( msg => {
+    this.privateMsgSub = this.messagesService.getMessages().subscribe( msg => {
 
       this.messages.push( msg )
       this.scrollChatToBottom()
 
     })
+  }
+
+  ngOnDestroy(): void {
+
+    this.msgSub.unsubscribe()
+    this.privateMsgSub.unsubscribe()
+
   }
 
   send() {
@@ -58,10 +66,12 @@ export class ChatRoomComponent implements OnInit {
   }
 
   scrollChatToBottom(): void {
+
     setTimeout(() => {
       const chatMessagesElement = this.chatMessagesRef.nativeElement;
       chatMessagesElement.scrollTop = chatMessagesElement.scrollHeight;
     }, 0);
+    
   }
 
 }

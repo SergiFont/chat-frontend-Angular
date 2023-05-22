@@ -1,16 +1,19 @@
-<button class="btn btn-secondary" type="button" (click)="showMenu = !showMenu">
+<button class="btn btn-secondary" id="menu-button" type="button" (click)="showMenu = !showMenu">
   Menu
 </button>
-<hr>
+<!-- <details id="menu-button" (click)="showMenu = !showMenu">
+  <summary>Menú</summary>
+</details> -->
 
-<div class="sidebar" *ngIf="showMenu">
 
-  <ul class="list-group-flush">
+<div class="sidebar" *ngIf="showMenu" id="side-menu">
+
+  <ul class="list-group-flush" id="button-list">
     <li routerLink="home" class="list-group-item">
-    <button class="sidebar-button">
-      <i class="fas fa-home"> Home</i>
-    </button>
-  </li>
+      <button class="sidebar-button">
+        <i class="fas fa-home"> Home</i>
+      </button>
+    </li>
     <li routerLink="chats" class="list-group-item">
       <button class="sidebar-button">
         <i class="fas fa-regular fa-comment"> Chats</i>
@@ -22,12 +25,10 @@
       </button>
     </li>
     <li class="list-group-item">
-    <button class="sidebar-button" (click)="onLogout()">
-      <i class="fas fa-solid fa-door-open"> Log out</i>
+      <button class="sidebar-button" (click)="onLogout()">
+        <i class="fas fa-solid fa-door-open"> Log out</i>
 
-   </button>
-  </li>
+      </button>
+    </li>
   </ul>
 </div>
-
-

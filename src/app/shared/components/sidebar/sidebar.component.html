@@ -1,18 +1,16 @@
-<button class="btn btn-secondary" type="button" (click)="showMenu = !showMenu"> Menu
+<button class="btn btn-secondary" type="button" (click)="showMenu = !showMenu">
+  Menu
 </button>
 <hr>
 
 <div class="sidebar" *ngIf="showMenu">
 
-  <ul class="list-group">
+  <ul class="list-group-flush">
     <li routerLink="home" class="list-group-item">
     <button class="sidebar-button">
       <i class="fas fa-home"> Home</i>
     </button>
   </li>
-    <!-- <li routerLink="home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="list-group-item">
-      Home
-    </li> -->
     <li routerLink="chats" class="list-group-item">
       <button class="sidebar-button">
         <i class="fas fa-regular fa-comment"> Chats</i>

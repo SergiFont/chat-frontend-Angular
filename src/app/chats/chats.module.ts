@@ -1,3 +1,4 @@
+import { MessageDemoComponent } from './components/messages/messagesdemo.component';
 import { NgModule } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
@@ -11,7 +12,6 @@ import { FooterComponent } from './components/footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { UsersModule } from '../users/users.module';
 import { AuthModule } from '../auth/auth.module';
-import { MessagesDemoComponent } from './components/messages/messagesdemo.component';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
@@ -20,7 +20,7 @@ import { RouterModule } from '@angular/router';
     ChatRoomTableComponent,
     ChatRoomComponent,
     FooterComponent,
-    MessagesDemoComponent
+    MessageDemoComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +33,7 @@ import { RouterModule } from '@angular/router';
     WebsocketModule
   ],
   exports: [
-    ChatsRoutingModule
+    ChatsRoutingModule,
   ]
 
 })

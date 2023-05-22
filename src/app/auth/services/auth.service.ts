@@ -4,6 +4,7 @@ import { Observable, catchError, map, of, throwError } from 'rxjs';
 import { environment } from 'src/environments/environments';
 import { AuthStatus, CheckTokenResponse, LoginResponse, RegisterResponse, User } from '../interfaces';
 import { Socket } from 'ngx-socket-io'
+import { Message } from 'src/app/chats/pages/chat-room/chat-room.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -78,6 +79,7 @@ export class AuthService {
 
     if (!token) {
       this.logout()
+
       return of(false)
     }
 
@@ -87,7 +89,6 @@ export class AuthService {
     return this.http.get<CheckTokenResponse>(url, { headers })
       .pipe(
         map(({ user, token }) => {
-          console.log('estoy en el map');
           return this.setAuthentication(user, token)
         }),
         catchError((err) => {
@@ -123,8 +124,6 @@ export class AuthService {
       this.socketStatus = false
     })
 
-    this.socketStatus = true
-
   }
 
   emit(event: string, payload?: any): void {
@@ -134,7 +133,7 @@ export class AuthService {
 
   }
 
-  listen(event: string): Observable<unknown> {
+  listen(event: string): Observable<Message> {
     return this.socket.fromEvent(event)
   }
 

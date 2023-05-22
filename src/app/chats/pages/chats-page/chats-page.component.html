@@ -1,21 +1,22 @@
-<h2>Chat rooms</h2>
-<hr>
 
 <div class="row">
+  <h2 class="alert alert-primary" role="alert">Chat rooms</h2>
+  <hr>
   <div class="col">
     <shared-search-box
       (onDebounce)="searchByName($event)"
       placeholder="Search a room..."
-      >
-
-    </shared-search-box>
+    ></shared-search-box>
   </div>
 </div>
 
-  <div class="row">
-    <div class="col">
-      <hr>
-      <shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner>
-      <chat-room-table [chatRooms]="chatRooms"></chat-room-table>
-    </div>
+<div class="row justify-content-center mt-3">
+  <div class="col-12">
+    <hr>
+    <shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner>
+    <chat-room-table [chatRooms]="chatRooms"></chat-room-table>
+  </div>
+ <div class="col-4 offset-3">
+   <app-pagination [pagination]="numberRooms" (onIndex)="findRooms($event)"></app-pagination>
+ </div>
 </div>

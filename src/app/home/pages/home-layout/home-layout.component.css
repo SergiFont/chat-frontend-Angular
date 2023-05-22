@@ -18,22 +18,7 @@
   max-width: 100%;
 }
 
-.d-flex {
-  display: flex;
-}
-
-.flex-column {
-  flex-direction: column;
-}
-
-.align-items-center {
-  align-items: center;
-}
-
-.justify-content-center {
-  justify-content: center;
-}
-
-.mt-4 {
-  margin-top: 1rem;
+.col-2 {
+  flex: 0 0 16.666667%;
+  max-width: 16.666667%;
 }

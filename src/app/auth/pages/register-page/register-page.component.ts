@@ -27,7 +27,7 @@ export class RegisterPageComponent {
 
     this.authService.register(email, username, password)
       .subscribe({
-        next: () => this.router.navigateByUrl('/home'),
+        next: () => this.router.navigateByUrl(''),
         error: (message) => {
           Swal.fire('Error', message, 'error')
         }

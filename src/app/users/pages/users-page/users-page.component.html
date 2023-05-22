@@ -1,22 +1,22 @@
-<h2>Users</h2>
-<hr>
-
 <div class="row">
-  <div class="col">
-    <shared-search-box
-    (onDebounce)="searchByName($event)"
+  <h2 class="alert alert-primary" role="alert">Users</h2>
+  <hr>
+    <div class="col">
+      <shared-search-box
+      (onDebounce)="searchByName($event)"
       placeholder="Search a user..."
       >
-
-    </shared-search-box>
+      </shared-search-box>
+    </div>
   </div>
-</div>
 
-  <div class="row">
-    <div class="col">
+  <div class="row justify-content-center mt-3">
+    <div class="col-12">
       <hr>
       <shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner>
       <user-table [users]="chatUsers"></user-table>
     </div>
-
+    <div class="col-4 offset-3">
+      <app-pagination [pagination]="numberUsers" (onIndex)="findUsers($event)"></app-pagination>
+    </div>
 </div>

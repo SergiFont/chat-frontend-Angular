@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { APIUserResponse, ChatUser } from '../../interfaces';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'user-table',
@@ -10,6 +11,6 @@ import { APIUserResponse, ChatUser } from '../../interfaces';
 export class UserTableComponent {
 
   @Input()
-  public users?: ChatUser[] = []
+  public users?: Observable<ChatUser[]>
 
 }

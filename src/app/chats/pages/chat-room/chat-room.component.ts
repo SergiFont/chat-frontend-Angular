@@ -4,6 +4,10 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { MessagesService } from 'src/app/websocket/services/messages.service';
 // import { WebsocketService } from 'src/app/websocket/services/websocket.service';
 
+export interface Message {
+  from: string,
+  message: string
+}
 
 @Component({
   selector: 'app-chat-room',
@@ -12,13 +16,11 @@ import { MessagesService } from 'src/app/websocket/services/messages.service';
     './chat-room.component.css'
   ]
 })
-export class ChatRoomComponent implements OnInit, OnDestroy {
+export class ChatRoomComponent implements OnInit {
 
 
   @ViewChild('chatMessages', { static: false, read: ElementRef }) chatMessagesRef!: ElementRef;
   text: string = ''
-  messagesSubscription!: Subscription
-  privateMessagesSub!: Subscription
 
   messages: any[] = []
 
@@ -32,25 +34,18 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
 
     if ( !this.authService.socketStatus) this.authService.checkSocketStatus( this.authService.currentUser()!.id )
 
-    this.privateMessagesSub = this.messagesService.getPrivateMessages().subscribe( msg => {
+    this.messagesService.getPrivateMessages().subscribe( msg => {
 
       console.log(msg);
 
     })
 
-    this.messagesSubscription = this.messagesService.getMessages().subscribe( msg => {
+    this.messagesService.getMessages().subscribe( msg => {
 
       this.messages.push( msg )
       this.scrollChatToBottom()
 
     })
-  }
-
-  ngOnDestroy(): void {
-
-    this.messagesSubscription.unsubscribe()
-    this.privateMessagesSub.unsubscribe()
-
   }
 
   send() {

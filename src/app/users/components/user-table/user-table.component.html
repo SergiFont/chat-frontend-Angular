@@ -1,5 +1,5 @@
-<div *ngIf="users?.length === 0; else table" class="alert alert-warning text-center">
-  No chat rooms were found
+<div *ngIf="(users | async)?.length === 0; else table" class="alert alert-warning text-center">
+  No users were found
 </div>
 
 <ng-template #table>
@@ -9,12 +9,11 @@
       <tr>
         <th>#</th>
         <th>Name</th>
-        <!-- <th>#</th> -->
         <th></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of users; let i = index">
+      <tr *ngFor="let user of users | async; let i = index">
         <td> {{ i + 1 }} </td>
         <td> {{ user.username }} </td>
         <td>

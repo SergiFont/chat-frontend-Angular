@@ -14,18 +14,13 @@ export class ChatsService {
 
   constructor(
     private http: HttpClient,
-    private authService: AuthService
     ) {}
 
-  findAllRooms(): Observable<ChatRoom[]> {
+    retrieveRooms(offset: number = 0): Observable<ChatRoom[]> {
 
-    const url: string = `${ this.baseUrl }/api/rooms`
-    const token = localStorage.getItem('token')
+    const url = `${ this.baseUrl }/api/rooms?offset=${offset}`
 
-    // this.authService.checkAuthStatus()
-
-    const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${ token }`)
+    const headers = this.getAuthHeaders()
 
     return this.http.get<ChatRoom[]>( url, { headers } )
       .pipe(
@@ -33,24 +28,37 @@ export class ChatsService {
       )
   }
 
-  findRoom( term: string ): Observable<ChatRoom[]> {
+  findRooms( term: string ): Observable<ChatRoom[]> {
 
     const url: string = `${ this.baseUrl }/api/rooms/${term}`
-    const token = localStorage.getItem('token')
 
-    this.authService.checkAuthStatus()
-    // if ( !token ) {
-    //   this.authService.logout()
-    // }
+    const headers = this.getAuthHeaders()
 
-    const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${ token }`)
 
       return this.http.get<ChatRoom[]>( url, { headers } )
       .pipe(
         catchError( () => of([]) ),
         delay( 1000 ),
       )
+  }
+
+  getPaginationRooms(): Observable<number> {
+    const url: string = `${ this.baseUrl }/api/rooms/total`
+
+    const headers = this.getAuthHeaders()
+
+    return this.http.get<number>(url, { headers } )
+      .pipe(
+        map( number => Math.ceil(number / 10) )
+      )
+  }
+
+  getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token')
+
+    return new HttpHeaders()
+      .set('Authorization', `Bearer ${ token }`)
+
   }
 
 }

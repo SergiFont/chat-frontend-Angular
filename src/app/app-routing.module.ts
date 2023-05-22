@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeLayoutComponent } from './home/pages/home-layout/home-layout.component';
-import { isAuthenticatedGuard } from './auth/guards/is-authenticated.guard';
 import { checkTokenGuard } from './auth/guards/check-token.guard';
 
 const routes: Routes = [
   {
-    path: '', component: HomeLayoutComponent,
-    // canActivate: [isAuthenticatedGuard],
+    path: '',
+    canActivate: [checkTokenGuard],
+    canActivateChild: [checkTokenGuard],
+    component: HomeLayoutComponent,
+
     children: [
-      { path: 'chats', canActivate: [checkTokenGuard], loadChildren: () => import('./chats/chats.module').then(m => m.ChatsModule)},
-      { path: 'users', canActivate: [checkTokenGuard], loadChildren: () => import('./users/users.module').then(m => m.UsersModule)}
+      { path: 'chats', loadChildren: () => import('./chats/chats.module').then(m => m.ChatsModule)},
+      { path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule)}
     ]
   },
 

@@ -1,0 +1,12 @@
+.paginationFixed {
+  bottom: 0;
+  position: fixed;
+  left: 5%;
+}
+
+
+@media (min-width: 990px) {
+  .paginationFixed {
+    left: auto;
+  }
+}

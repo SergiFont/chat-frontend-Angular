@@ -1,5 +1,5 @@
 import { RouterModule } from '@angular/router';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { SearchBoxComponent } from './components/search-box/search-box.component';
@@ -9,6 +9,7 @@ import { MessageModule } from 'primeng/message';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { InputTextModule } from 'primeng/inputtext';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 
 
@@ -17,6 +18,7 @@ import { InputTextModule } from 'primeng/inputtext';
     SidebarComponent,
     SearchBoxComponent,
     LoadingSpinnerComponent,
+    PaginationComponent,
   ],
   imports: [
     CommonModule,
@@ -31,7 +33,8 @@ import { InputTextModule } from 'primeng/inputtext';
 		MessageModule,
 		ButtonModule,
 		ToastModule,
-		InputTextModule
+		InputTextModule,
+    PaginationComponent
   ],
 })
 export class SharedModule { }

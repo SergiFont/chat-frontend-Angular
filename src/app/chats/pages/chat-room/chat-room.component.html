@@ -1,31 +1,35 @@
-<h1>Messages</h1>
+<h2 class="alert alert-primary" role="alert">Messages</h2>
 <hr>
 
-<div id="chat-messages" #chatMessages>
-  <li class="list-group-item"
-      *ngFor="let msg of messages">
-      <h6>{{ msg.from }}:</h6>
-     {{ msg.message }}
-     <hr>
-  </li>
-</div>
+<div class="row">
+  <div class="col">
+    <div id="chat-messages" #chatMessages>
+      <li class="list-group-item"
+          *ngFor="let msg of messages">
+          <h6>{{ msg.from }}:</h6>
+         {{ msg.message }}
+         <hr>
+      </li>
+    </div>
 
-<form (ngSubmit)="send()">
+    <form (ngSubmit)="send()">
 
-  <input type="text"
-         [(ngModel)]="text"
-         class="form-control chat-input"
-         name="text"
-         placeholder="Message..."
-         autofocus
-         autocomplete="off"
-        >
+      <input type="text"
+             [(ngModel)]="text"
+             class="form-control chat-input"
+             name="text"
+             placeholder="Message..."
+             autofocus
+             autocomplete="off"
+            >
 
-</form>
-<div class="col">
+    </form>
+  </div>
+  <div class="col-2">
 
-  <app-user-list></app-user-list>
+    <app-user-list></app-user-list>
 
+  </div>
 </div>
 
 

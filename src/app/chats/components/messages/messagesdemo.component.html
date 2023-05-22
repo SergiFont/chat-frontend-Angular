@@ -1,16 +1,5 @@
 <div class="grid">
-    <div class="col-12 lg:col-6">
-        <div class="card">
-            <h5>Toast</h5>
-            <p-toast key="tst"></p-toast>
-            <div class="flex flex-wrap gap-2">
-                <button type="button" pButton (click)="showSuccessViaToast()" label="Success" class="p-button-success"></button>
-                <button type="button" pButton (click)="showInfoViaToast()" label="Info" class="p-button-info"></button>
-                <button type="button" pButton (click)="showWarnViaToast()" label="Warn" class="p-button-warning"></button>
-                <button type="button" pButton (click)="showErrorViaToast()" label="Error" class="p-button-danger"></button>
-            </div>
-        </div>
-    </div>
+
 
     <div class="col-12 lg:col-6">
         <div class="card z-3">
@@ -22,11 +11,23 @@
                 <button type="button" pButton (click)="showErrorViaMessages()" label="Error" class="p-button-danger"></button>
             </div>
 
-            <p-messages [value]="msgs"></p-messages>
+            <p-messages [value]="messages"></p-messages>
         </div>
+        <form (ngSubmit)="send()">
+
+          <input type="text"
+                 [(ngModel)]="text"
+                 class="form-control chat-input"
+                 name="text"
+                 placeholder="Message..."
+                 autofocus
+                 autocomplete="off"
+                >
+
+        </form>
     </div>
 
-    <div class="col-12 lg:col-4">
+    <!-- <div class="col-12 lg:col-4">
         <div class="card">
             <h5>Help Text</h5>
             <div class="field p-fluid">
@@ -35,5 +36,5 @@
                 <small id="username-help" class="p-error">Enter your username to reset your password.</small>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>

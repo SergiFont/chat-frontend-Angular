@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ChatRoom } from '../../interfaces/Chat-room.interface';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'chat-room-table',
@@ -10,6 +11,6 @@ import { ChatRoom } from '../../interfaces/Chat-room.interface';
 export class ChatRoomTableComponent {
 
   @Input()
-  public chatRooms?: ChatRoom[] = []
+  public chatRooms?: Observable<ChatRoom[]>
 
 }

@@ -1,6 +1,8 @@
-import { NgModule, forwardRef } from '@angular/core';
+import { NgModule, forwardRef, } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http'
+
 
 import { SocketIoConfig, SocketIoModule} from 'ngx-socket-io';
 import { environment } from 'src/environments/environments';
@@ -30,6 +32,7 @@ import { HomeModule } from './home/home.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     SharedModule,

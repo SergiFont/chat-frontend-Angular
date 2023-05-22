@@ -1,10 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ChatRoom } from '../../interfaces/Chat-room.interface';
 import { ChatsService } from '../../services/chats.service';
-import { ActivatedRoute } from '@angular/router';
-import { AuthService } from 'src/app/auth/services/auth.service';
-import { Subscription } from 'rxjs';
-import { MessagesService } from 'src/app/websocket/services/messages.service';
+import { Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'chats-page',
@@ -13,24 +10,21 @@ import { MessagesService } from 'src/app/websocket/services/messages.service';
     './chats-page.component.css'
   ]
 })
-export class ChatsPageComponent implements OnInit {
+export class ChatsPageComponent {
 
-  public chatRooms: ChatRoom[] = []
+  public chatRooms!: Observable<ChatRoom[]>
+  public numberRooms!: Observable<number>
   public isLoading: boolean = false
 
-  constructor(
-    private readonly chatsService: ChatsService,
-    private readonly authService: AuthService,
-    private readonly messagesService: MessagesService
-  ) { }
+  constructor( private readonly chatsService: ChatsService ) {
+    this.findRooms()
+  }
 
-  ngOnInit(): void {
-    this.chatsService.findAllRooms()
-      .subscribe(chatRooms => {
-        return this.chatRooms = chatRooms
-      })
+  findRooms(offset?: number): void {
 
-      
+    this.numberRooms = this.chatsService.getPaginationRooms()
+
+    this.chatRooms = this.chatsService.retrieveRooms(offset)
 
   }
 
@@ -38,12 +32,11 @@ export class ChatsPageComponent implements OnInit {
 
     this.isLoading = true
 
-    this.chatsService.findRoom(term)
-      .subscribe(room => {
-        this.chatRooms = room
-        this.isLoading = false
-      })
-
+    this.chatRooms = this.chatsService.findRooms(term)
+      .pipe(
+        tap(() => {
+          this.isLoading = false
+        }))
   }
 
 }

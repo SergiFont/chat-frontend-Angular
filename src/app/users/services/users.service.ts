@@ -14,20 +14,13 @@ export class UsersService {
 
   constructor(
     private http: HttpClient,
-    private authService: AuthService
     ) {}
 
-  findAllUsers(): Observable<ChatUser[]> {
+  findUsers( offset: number = 0 ): Observable<ChatUser[]> {
 
-    const url: string = `${ this.baseUrl }/api/auth`
-    const token = localStorage.getItem('token')
+    const url = `${ this.baseUrl }/api/auth?offset=${offset}`
 
-    if ( !token ) {
-      this.authService.logout()
-    }
-
-    const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${ token }`)
+    const headers = this.getAuthHeaders()
 
     return this.http.get<APIUserResponse>( url, { headers } )
       .pipe(
@@ -39,14 +32,8 @@ export class UsersService {
   findUsersByName( term: string ): Observable<ChatUser[]> {
 
     const url: string = `${ this.baseUrl }/api/auth/${ term }`
-    const token = localStorage.getItem('token')
 
-    if ( !token ) {
-      this.authService.logout()
-    }
-
-    const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${ token }`)
+    const headers = this.getAuthHeaders()
 
     return this.http.get<APIUserResponse>( url, { headers } )
       .pipe(
@@ -54,5 +41,24 @@ export class UsersService {
         catchError( () => of([])),
         delay( 1000 )
       )
+  }
+
+  getPaginationUsers(): Observable<number> {
+    const url: string = `${ this.baseUrl }/api/auth/total`
+
+    const headers = this.getAuthHeaders()
+
+    return this.http.get<number>(url, { headers } )
+    .pipe(
+      map( number => Math.ceil(number / 10) )
+    )
+  }
+
+  getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token')
+
+    return new HttpHeaders()
+      .set('Authorization', `Bearer ${ token }`)
+
   }
 }

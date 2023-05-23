@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeLayoutComponent } from './home/pages/home-layout/home-layout.component';
+import { HomeLayoutComponent } from './home/layouts/home-layout/home-layout.component';
 import { checkTokenGuard } from './auth/guards/check-token.guard';
 
 const routes: Routes = [

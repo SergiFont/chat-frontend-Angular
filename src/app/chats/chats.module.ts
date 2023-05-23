@@ -1,4 +1,4 @@
-import { MessageDemoComponent } from './components/messages/messagesdemo.component';
+// import { MessageDemoComponent } from './components/messages/messagesdemo.component';
 import { NgModule } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
@@ -20,7 +20,7 @@ import { RouterModule } from '@angular/router';
     ChatRoomTableComponent,
     ChatRoomComponent,
     FooterComponent,
-    MessageDemoComponent
+    // MessageDemoComponent
   ],
   imports: [
     CommonModule,

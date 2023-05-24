@@ -1,0 +1,7 @@
+<footer class="p-2 bg-dark text-white text-right">
+
+  Chat status:
+  <span *ngIf="authService.socketStatus" class="text-success"> Online</span>
+  <span *ngIf="!authService.socketStatus" class="text-danger"> Offline</span>
+
+</footer>

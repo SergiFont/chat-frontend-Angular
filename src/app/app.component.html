@@ -1,9 +1,5 @@
+<div class="container">
 
-  <h1 *ngIf="!finishAuthCheck()">
-    Loading
-  </h1>
+  <router-outlet></router-outlet>
 
-
-    <router-outlet *ngIf="finishAuthCheck()"></router-outlet>
-
-
+</div>

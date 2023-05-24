@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { APIUserResponse, ChatUser } from '../../interfaces'
 import { UsersService } from '../../services/users.service';
+import { Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'users-page',
@@ -8,32 +9,36 @@ import { UsersService } from '../../services/users.service';
   styles: [
   ]
 })
-export class UsersPageComponent implements OnInit {
+export class UsersPageComponent {
 
-  // public defaultUsers?: ChatUser[] = []
-  public chatUsers?: ChatUser[] = []
+  public chatUsers!: Observable<ChatUser[]>
+  public numberUsers!: Observable<number>
   public isLoading: boolean = false
 
-  constructor( private usersService: UsersService ) {}
-
-  ngOnInit(): void {
-    this.usersService.findAllUsers()
-      .subscribe ( users => {
-
-          this.chatUsers = users
-
-      })
+  constructor(private usersService: UsersService) {
+    this.findUsers()
   }
 
-  searchByName( term: string ): void {
+
+
+  findUsers(offset?: number): void {
+
+    this.numberUsers = this.usersService.getPaginationUsers()
+
+    this.chatUsers = this.usersService.findUsers(offset)
+
+  }
+
+  searchByName(term: string): void {
 
     this.isLoading = true
 
-   this.usersService.findUsersByName( term )
-      .subscribe( user => {
-        this.chatUsers = user
-        this.isLoading = false
-      })
+    this.chatUsers = this.usersService.findUsersByName(term)
+      .pipe(
+        tap(() => {
+          this.isLoading = false
+        })
+      )
 
   }
 

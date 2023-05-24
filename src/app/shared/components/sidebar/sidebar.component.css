@@ -1,7 +1,10 @@
-
+.btn {
+  background-color: #193246;
+}
 
 .sidebar h2 {
   margin-bottom: 20px;
+  margin-left: 100px;
 }
 
 .sidebar ul {
@@ -10,27 +13,28 @@
   margin: 0;
 }
 
+#side-menu {
+  position: fixed;
+  margin-top: 60px;
+}
+
 .sidebar ul li {
   margin-bottom: 10px;
 }
 
 .sidebar ul li a {
-  color: #fff;
+
   text-decoration: none;
-  display: block;
+  /* display: block; */
   padding: 5px;
   border-radius: 5px;
 }
 
-.sidebar ul li a:hover {
-  background-color: #193246;
-}
-
 .sidebar-button {
-  display: block;
-  width: 100%;
+  /* display: block; */
+  width: 75%;
   padding: 8px 12px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   border: none;
   background-color: #193246;
   color: #fff;
@@ -39,17 +43,43 @@
   cursor: pointer;
 }
 
-@media (max-width: 768px) {
-  .sidebar {
-    width: 100%;
-    padding: 10px;
-  }
 
-  .sidebar h2 {
-    text-align: center;
-  }
 
-  .sidebar ul li {
-    margin-bottom: 5px;
+@media (max-width: 400px) {
+  /* Apply narrower width to buttons when screen size is below 400px */
+  #side-menu button {
+    width: 100px; /* Adjust the width as per your requirements */
   }
+  #side-menu {
+    /* visibility: hidden; */
+    position: fixed;
+    top: 0;
+    /* padding-top: 1.5rem; */
+    height: 100vh;
+    /* right: -100%; */
+    right: 0;
+    transition: visibility 0.75s, right 0.75s;
+  z-index: 10;
+  }
+  
+  #menu-button[open]~#side-menu {
+    right: 0;
+    transition: visibility 0.5s, right 0.5s;
+    visibility: visible;
+    background-color: #193246;
+  
+  }
+  
+  #side-menu {
+    top: 0;
+    position: fixed;
+    /* bottom: 20px; */
+    right: 20px;
+    left: auto;
+  }
+ 
 }
+ #menu-button{
+    position: fixed;
+    z-index: 10;
+  }

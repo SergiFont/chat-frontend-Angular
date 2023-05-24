@@ -1,0 +1,12 @@
+<nav class="mt-3 paginationFixed">
+  <ul class="pagination">
+    <li class="page-item page-link pe-auto"
+        *ngFor="let item of paginationItems; let i = index;"
+        (click)="sendIndex(i)"
+        [ngClass]="{ 'active': selectedIndex === i }"
+        [style.cursor]="'pointer'"
+        >
+      {{ i + 1 }}
+    </li>
+  </ul>
+</nav>

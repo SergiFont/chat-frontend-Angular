@@ -19,7 +19,7 @@ export class RegisterPageComponent {
   public myForm: FormGroup = this.fb.group({
     email:    ['sergi@mail.com', [ Validators.required, Validators.email ]],
     username: ['SergiFont', [ Validators.required, Validators.minLength(3), Validators.maxLength(15), Validators.pattern(/^\S*$/) ]],
-    password: ['Mypassword123', [ Validators.required, Validators.minLength(6), Validators.maxLength(20), Validators.pattern(/(?:(?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/) ]]
+    password: ['Mypassword12345', [ Validators.required, Validators.minLength(6), Validators.maxLength(20), Validators.pattern(/(?:(?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/) ]]
   })
 
   register() {
@@ -27,7 +27,7 @@ export class RegisterPageComponent {
 
     this.authService.register(email, username, password)
       .subscribe({
-        next: () => this.router.navigateByUrl('/home'),
+        next: () => this.router.navigateByUrl(''),
         error: (message) => {
           Swal.fire('Error', message, 'error')
         }

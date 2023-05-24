@@ -1,40 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ChatRoom } from '../../interfaces/Chat-room.interface';
 import { ChatsService } from '../../services/chats.service';
+import { Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'chats-page',
   templateUrl: './chats-page.component.html',
-  styles: [
+  styleUrls: [
+    './chats-page.component.css'
   ]
 })
-export class ChatsPageComponent implements OnInit {
+export class ChatsPageComponent {
 
-  public chatRooms: ChatRoom[] = []
+  public chatRooms!: Observable<ChatRoom[]>
+  public numberRooms!: Observable<number>
   public isLoading: boolean = false
 
-  constructor(
-    private chatsService: ChatsService,
-     ) {}
+  constructor( private readonly chatsService: ChatsService ) {
+    this.findRooms()
+  }
 
-  ngOnInit(): void {
-    this.chatsService.findAllRooms()
-      .subscribe( chatRooms => {
-        return this.chatRooms = chatRooms
-      })
+  findRooms(offset?: number): void {
+
+    this.numberRooms = this.chatsService.getPaginationRooms()
+
+    this.chatRooms = this.chatsService.retrieveRooms(offset)
 
   }
 
-  searchByName( term: string ): void {
+  searchByName(term: string): void {
 
     this.isLoading = true
 
-    this.chatsService.findRoom( term )
-      .subscribe( room => {
-        this.chatRooms = room
-        this.isLoading = false
-      })
-
+    this.chatRooms = this.chatsService.findRooms(term)
+      .pipe(
+        tap(() => {
+          this.isLoading = false
+        }))
   }
 
 }

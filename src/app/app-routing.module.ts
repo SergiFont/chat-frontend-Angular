@@ -1,29 +1,29 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { isAuthenticatedGuard } from './auth/guards/is-authenticated.guard';
+import { HomeLayoutComponent } from './home/layouts/home-layout/home-layout.component';
 import { checkTokenGuard } from './auth/guards/check-token.guard';
-import { HomePageComponent } from './home/pages/home-page/home-page.component';
-import { AuthLayoutComponent } from './auth/layouts/auth-layout/auth-layout.component';
 
 const routes: Routes = [
-
   {
-    path: 'auth',
-    // guards
-    loadChildren: () => import('./auth/auth.module').then( m => m.AuthModule ),
-    // component: AuthLayoutComponent
+    path: '',
+    canActivate: [checkTokenGuard],
+    canActivateChild: [checkTokenGuard],
+    component: HomeLayoutComponent,
+
+    children: [
+      { path: 'chats', loadChildren: () => import('./chats/chats.module').then(m => m.ChatsModule)},
+      { path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule)}
+    ]
   },
 
   {
-    path: 'home',
-    canActivate: [ isAuthenticatedGuard ],
-    loadChildren: () => import('./home/home.module').then( m => m.HomeModule ),
-    component: HomePageComponent
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then( m => m.AuthModule ),
   },
 
   {
     path: '**',
-    redirectTo: 'home'
+    redirectTo: ''
   },
 
 ];

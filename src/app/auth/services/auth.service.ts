@@ -11,7 +11,6 @@ import { Message } from 'src/app/chats/pages/chat-room/chat-room.component';
 export class AuthService {
 
   private readonly baseUrl: string = environment.baseUrl
-  // private http = inject(HttpClient)
 
   private _currentUser = signal<User | null>(null)
   private _authStatus = signal<AuthStatus>(AuthStatus.checking)

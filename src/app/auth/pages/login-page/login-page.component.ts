@@ -19,7 +19,7 @@ export class LoginPageComponent {
 
   public myForm: FormGroup = this.fb.group({
     email:    ['user0@example.com', [ Validators.required, Validators.email ]],
-    password: ['MyPassword123', [ Validators.required, Validators.minLength(6), Validators.maxLength(20) ]],
+    password: ['MyPassword12345', [ Validators.required, Validators.minLength(6), Validators.maxLength(20) ]],
   })
 
   login() {
